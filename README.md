@@ -113,16 +113,19 @@
 #该库还为每类适配器封装了一个包装类，可对视图控件和数据适配器的处理进行解耦，直接通过包装类完成相对视图的各类所需接口的设定处理，各类适配器所对应的包装类如下
     
     1.基于BaseAdapter的视图
+    
     adapterViewEntityWrapper = new AdapterViewEntityWrapper<String>(absListView);
     adapterViewEntityWrapper.setAdapter(new BaseEntityViewAdapter<String>(this, dataList, baseAdapterEntityViewManage));
     adapterViewEntityWrapper.setOnEntityViewClickListener(onEntityViewClickListener);
     
     2.基于PagerAdapter的视图
+    
     ViewPagerEntityWrapper<Integer> viewPagerEntityWrapper = new ViewPagerEntityWrapper<Integer>(viewPager);
     viewPagerEntityWrapper.setAdapter(new BaseEntityPageAdapter<Integer>(this, dataList, baseAdapterEntityViewManage));
     viewPagerEntityWrapper.setOnEntityViewPagerClickListener(onEntityViewPagerClickListener);
     
     3.基于BaseExpandableListAdapter的视图
+    
     ExpandableListViewAdapterWrapper<GroupEntity, ChildEntity> expandableListViewAdapterWrapper =
                     new ExpandableListViewAdapterWrapper<GroupEntity, ChildEntity>(expandableListView);
     expandableListViewAdapterWrapper.setBaseEntityExpandableListAdapter(new BaseEntityExpandableListAdapter<GroupEntity, ChildEntity>(expandableListView,
