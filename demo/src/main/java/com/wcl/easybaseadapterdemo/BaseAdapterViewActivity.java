@@ -21,18 +21,18 @@ import java.util.List;
  * AdapterView通用适配器基类
  */
 public class BaseAdapterViewActivity extends Activity {
-    AbsListView listView;
+    AbsListView absListView;
     private AdapterViewEntityWrapper<String> adapterViewEntityWrapper;
 
     protected void init(){
-        listView = (AbsListView) findViewById(R.id.abslistview);
+        absListView = (AbsListView) findViewById(R.id.abslistview);
 
         List<String> dataList = new ArrayList<String>();
         for (int i = 0; i < 30; i++){
             dataList.add("item>>>"+i);
         }
 
-        adapterViewEntityWrapper = new AdapterViewEntityWrapper<String>(listView);
+        adapterViewEntityWrapper = new AdapterViewEntityWrapper<String>(absListView);
         adapterViewEntityWrapper.setAdapter(new BaseEntityViewAdapter<String>(this, dataList, baseAdapterEntityViewManage));
         adapterViewEntityWrapper.setOnEntityViewClickListener(onEntityViewClickListener);
     }

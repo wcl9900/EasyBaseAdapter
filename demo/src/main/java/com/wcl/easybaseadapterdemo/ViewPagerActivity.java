@@ -26,6 +26,7 @@ public class ViewPagerActivity extends Activity{
 
     ViewPager viewPager;
     TextView tv_info;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,12 +45,7 @@ public class ViewPagerActivity extends Activity{
 
         ViewPagerEntityWrapper<Integer> viewPagerEntityWrapper = new ViewPagerEntityWrapper<Integer>(viewPager);
         viewPagerEntityWrapper.setAdapter(new BaseEntityPageAdapter<Integer>(this, dataList, baseAdapterEntityViewManage));
-        viewPagerEntityWrapper.setOnEntityViewPagerClickListener(new OnEntityViewPagerClickListener<Integer>() {
-            @Override
-            public void onEntityViewClick(ViewPager parent, View clickView, Integer entity, int position) {
-                Toast.makeText(ViewPagerActivity.this, "点击了第" + position + "个", Toast.LENGTH_SHORT).show();
-            }
-        });
+        viewPagerEntityWrapper.setOnEntityViewPagerClickListener(onEntityViewPagerClickListener);
 
     }
 
@@ -62,6 +58,13 @@ public class ViewPagerActivity extends Activity{
         @Override
         public void updateAdapterItemView(Context context, View updateView, Integer entity, int position) {
             updateView.setBackgroundColor(entity);
+        }
+    };
+
+    OnEntityViewPagerClickListener onEntityViewPagerClickListener = new OnEntityViewPagerClickListener<Integer>() {
+        @Override
+        public void onEntityViewClick(ViewPager parent, View clickView, Integer entity, int position) {
+            Toast.makeText(ViewPagerActivity.this, "点击了第" + position + "个", Toast.LENGTH_SHORT).show();
         }
     };
 
