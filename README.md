@@ -5,6 +5,12 @@
 
 使用非常简单，只需两步即可完成数据的绑定和显示
 
+##Gradle
+    repositories {
+        jcenter()
+    }
+compile 'com.wcl:easybaseadapter:1.0.0'
+
  1.基于BaseAdapter的列表视图（ListView、GridView等AbsListView）
  
     1）.创建并设定适配器
