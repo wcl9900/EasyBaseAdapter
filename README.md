@@ -1,15 +1,16 @@
-    #EasyBaseAdapter
+# EasyBaseAdapter
     该库对BaseAdapter、ViewPagerAdapter、BaseExpandableListAdapter等视图适配器进行了最大化封装，使用泛型模式对需要绑定的数据进行解耦，使其在开发过程中使用更加简洁，减少代码冗余，可使开发者不在关心各类Adapter内部的具体实现细节，更多的把注意力转移到业务逻辑处理中，该库使用非常简单，很容易上手，一看就懂，可使开发者最快速度的完成视图数据的绑定和展示，大大的提高了数据适配器绑定视图的开发效率。
 
-    #使用方式
+# 使用方式
 
     使用非常简单，只需两步即可完成数据的绑定和显示
 
-    ##Gradle
+    Gradle
     repositories {
         jcenter()
     }
     compile 'com.wcl:easybaseadapter:1.0.0'
+    
 
     1.基于BaseAdapter的列表视图（ListView、GridView等AbsListView）
  
