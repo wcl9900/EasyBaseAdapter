@@ -1,17 +1,17 @@
-#EasyBaseAdapter
-  该库对BaseAdapter、ViewPagerAdapter、BaseExpandableListAdapter等视图适配器进行了最大化封装，使用泛型模式对需要绑定的数据进行解耦，使其在开发过程中使用更加简洁，减少代码冗余，可使开发者不在关心各类Adapter内部的具体实现细节，更多的把注意力转移到业务逻辑处理中，该库使用非常简单，很容易上手，一看就懂，可使开发者最快速度的完成视图数据的绑定和展示，大大的提高了数据适配器绑定视图的开发效率。
+    #EasyBaseAdapter
+    该库对BaseAdapter、ViewPagerAdapter、BaseExpandableListAdapter等视图适配器进行了最大化封装，使用泛型模式对需要绑定的数据进行解耦，使其在开发过程中使用更加简洁，减少代码冗余，可使开发者不在关心各类Adapter内部的具体实现细节，更多的把注意力转移到业务逻辑处理中，该库使用非常简单，很容易上手，一看就懂，可使开发者最快速度的完成视图数据的绑定和展示，大大的提高了数据适配器绑定视图的开发效率。
 
-#使用方式
+    #使用方式
 
-使用非常简单，只需两步即可完成数据的绑定和显示
+    使用非常简单，只需两步即可完成数据的绑定和显示
 
-##Gradle
+    ##Gradle
     repositories {
         jcenter()
     }
-compile 'com.wcl:easybaseadapter:1.0.0'
+    compile 'com.wcl:easybaseadapter:1.0.0'
 
- 1.基于BaseAdapter的列表视图（ListView、GridView等AbsListView）
+    1.基于BaseAdapter的列表视图（ListView、GridView等AbsListView）
  
     1）.创建并设定适配器
    
@@ -51,7 +51,7 @@ compile 'com.wcl:easybaseadapter:1.0.0'
             }
         };
         
-   3.基于BaseExpandableListAdapter的视图
+    3.基于BaseExpandableListAdapter的视图
    
     1）.创建并设定适配器
     
@@ -85,8 +85,8 @@ compile 'com.wcl:easybaseadapter:1.0.0'
         };
         
         
-#本库还提供了更加快捷和简单的使用方式，代码量更少啊，看看下面^-^
-1.对每类数据适配器的视图创建和数据绑定回调接口，都提供了一个相对的抽象的适配接口，在此类接口只需要关心视图的数据绑定和显示即可，这类接口暂支持布局资源的使用
+    #本库还提供了更加快捷和简单的使用方式，代码量更少啊，看看下面^-^
+    1.对每类数据适配器的视图创建和数据绑定回调接口，都提供了一个相对的抽象的适配接口，在此类接口只需要关心视图的数据绑定和显示即可，这类接口暂支持布局资源的使用
   
     1).基于BaseAdapter和PagerAdapter的视图
     
@@ -116,7 +116,7 @@ compile 'com.wcl:easybaseadapter:1.0.0'
         };
 
 
-#该库还为每类适配器封装了一个包装类，可对视图控件和数据适配器的处理进行解耦，直接通过包装类完成相对视图的各类所需接口的设定处理，各类适配器所对应的包装类如下
+    #该库还为每类适配器封装了一个包装类，可对视图控件和数据适配器的处理进行解耦，直接通过包装类完成相对视图的各类所需接口的设定处理，各类适配器所对应的包装类如下
     
     1.基于BaseAdapter的视图
     
