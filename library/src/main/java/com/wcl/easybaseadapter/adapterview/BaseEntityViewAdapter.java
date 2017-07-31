@@ -5,8 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.wcl.easybaseadapter.entityviewmanage.BaseAdapterEntityViewManage;
 import com.wcl.easybaseadapter.constant.AdapterConstant;
+import com.wcl.easybaseadapter.entityviewmanage.BaseAdapterEntityViewManage;
+import com.wcl.easybaseadapter.viewholder.EntityViewHolder;
 
 import java.util.List;
 
@@ -64,13 +65,9 @@ public class BaseEntityViewAdapter<T> extends BaseAdapter {
 		holder = (EntityViewHolder<T>) convertView.getTag(AdapterConstant.TAG_KEY);
 		holder.entity = entityList.get(position);
 		holder.position = position;
-		adapterItemManage.updateAdapterItemView(context, convertView, entityList.get(position), position);
+		holder.itemView = convertView;
+		adapterItemManage.updateAdapterItemView(context, holder, holder.entity, position);
 
 		return convertView;
-	}
-	
-	public static class EntityViewHolder<T>{
-		public T entity;
-		public int position;
 	}
 }

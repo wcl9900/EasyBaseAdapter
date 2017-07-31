@@ -7,11 +7,11 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wcl.easybaseadapter.entityviewmanage.BaseAdapterEntityViewManage;
+import com.wcl.easybaseadapter.viewholder.EntityViewHolder;
 import com.wcl.easybaseadapter.viewpager.BaseEntityPageAdapter;
 import com.wcl.easybaseadapter.viewpager.ViewPagerEntityWrapper;
 import com.wcl.easybaseadapter.viewpager.listener.OnEntityViewPagerClickListener;
@@ -56,8 +56,8 @@ public class ViewPagerActivity extends Activity{
         }
 
         @Override
-        public void updateAdapterItemView(Context context, View updateView, Integer entity, int position) {
-            updateView.setBackgroundColor(entity);
+        public void updateAdapterItemView(Context context, EntityViewHolder holder, Integer entity, int position) {
+            holder.itemView.setBackgroundColor(entity);
         }
     };
 

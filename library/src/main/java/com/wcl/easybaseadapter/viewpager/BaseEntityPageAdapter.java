@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.wcl.easybaseadapter.entityviewmanage.BaseAdapterEntityViewManage;
 import com.wcl.easybaseadapter.constant.AdapterConstant;
+import com.wcl.easybaseadapter.viewholder.EntityViewHolder;
 import com.wcl.easybaseadapter.viewpager.listener.OnEntityViewPagerClickListener;
 
 import java.util.List;
@@ -59,10 +60,15 @@ public class BaseEntityPageAdapter<T> extends PagerAdapter implements OnClickLis
 		T entity = entityList.get(position);
 		View view = adapterItemManage.getAdapterItemView(context, entity, position);
 		container.addView(view);
-		adapterItemManage.updateAdapterItemView(context, view, entity, position);
-		view.setTag(AdapterConstant.TAG_KEY, new ViewHolder(container, entity, position));
+		EntityViewHolder<T> holder = new EntityViewHolder<T>();
+		holder.itemView = view;
+		holder.position = position;
+		holder.entity = entity;
+		holder.viewGroup = container;
+		view.setTag(AdapterConstant.TAG_KEY, holder);
 		view.setClickable(true);
 		view.setOnClickListener(this);
+		adapterItemManage.updateAdapterItemView(context, holder, entity, position);
 		return view;
 	}
 
@@ -74,26 +80,15 @@ public class BaseEntityPageAdapter<T> extends PagerAdapter implements OnClickLis
 	@Override
 	public void destroyItem(ViewGroup container, int position, Object object) {
 		View view = (View) object;
-		((ViewPager) container).removeView(view);
+		 container.removeView(view);
 	}
 
 	@Override
 	public void onClick(View v) {
 		@SuppressWarnings("unchecked")
-		ViewHolder viewHolder = (ViewHolder) v.getTag(AdapterConstant.TAG_KEY);
+		EntityViewHolder<T> viewHolder = (EntityViewHolder<T>) v.getTag(AdapterConstant.TAG_KEY);
 		if(onEntityViewPagerClickListener != null){
 			onEntityViewPagerClickListener.onEntityViewClick((ViewPager)viewHolder.viewGroup, v, viewHolder.entity, viewHolder.position);
-		}
-	}
-	
-	private class ViewHolder{
-		ViewGroup viewGroup;
-		T entity;
-		int position;
-		public ViewHolder(ViewGroup viewGroup, T entity, int position){
-			this.viewGroup = viewGroup;
-			this.entity = entity;
-			this.position = position;
 		}
 	}
 }

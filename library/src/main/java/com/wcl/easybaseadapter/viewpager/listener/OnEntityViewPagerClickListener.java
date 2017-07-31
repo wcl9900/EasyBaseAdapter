@@ -16,5 +16,5 @@ public interface OnEntityViewPagerClickListener<T>{
 	 * @param entity
 	 * @param position
 	 */
-	public void onEntityViewClick(ViewPager parent, View clickView, T entity, int position);
+	void onEntityViewClick(ViewPager parent, View clickView, T entity, int position);
 }

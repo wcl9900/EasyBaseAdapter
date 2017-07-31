@@ -9,9 +9,10 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.BaseAdapter;
 import android.widget.Spinner;
 
-import com.wcl.easybaseadapter.constant.AdapterConstant;
 import com.wcl.easybaseadapter.adapterview.listener.OnEntityViewClickListener;
 import com.wcl.easybaseadapter.adapterview.listener.OnEntityViewLongClickListener;
+import com.wcl.easybaseadapter.constant.AdapterConstant;
+import com.wcl.easybaseadapter.viewholder.EntityViewHolder;
 
 /**
  * AdapterView 列表视图包装类。可用于对AdapterView进行基于{@link BaseEntityViewAdapter}
@@ -146,11 +147,11 @@ public class AdapterViewEntityWrapper<T> implements OnItemClickListener,
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 							long id) {
 		Adapter adapter = getAdapter();
-		BaseEntityViewAdapter.EntityViewHolder holder = null;
+		EntityViewHolder holder = null;
 
 		if (view.getTag(AdapterConstant.TAG_KEY) != null
-				&& view.getTag(AdapterConstant.TAG_KEY) instanceof BaseEntityViewAdapter.EntityViewHolder) {
-			holder = (BaseEntityViewAdapter.EntityViewHolder) view.getTag(AdapterConstant.TAG_KEY);
+				&& view.getTag(AdapterConstant.TAG_KEY) instanceof EntityViewHolder) {
+			holder = (EntityViewHolder) view.getTag(AdapterConstant.TAG_KEY);
 		}
 
 		if (adapter != null && adapter instanceof ItemSelectAdapter) {
@@ -180,9 +181,9 @@ public class AdapterViewEntityWrapper<T> implements OnItemClickListener,
 	}
 
 	public void notifyDataSetChanged() {
-		Adapter adpter = getAdapter();
-		if (adpter != null && adpter instanceof BaseAdapter) {
-			((BaseAdapter) adpter).notifyDataSetChanged();
+		Adapter adapter = getAdapter();
+		if (adapter != null && adapter instanceof BaseAdapter) {
+			((BaseAdapter) adapter).notifyDataSetChanged();
 		}
 	}
 
@@ -207,8 +208,8 @@ public class AdapterViewEntityWrapper<T> implements OnItemClickListener,
 								   int position, long id) {
 		if (onEntityViewLongClickListener != null
 				&& view.getTag(AdapterConstant.TAG_KEY) != null
-				&& view.getTag(AdapterConstant.TAG_KEY) instanceof BaseEntityViewAdapter.EntityViewHolder) {
-			BaseEntityViewAdapter.EntityViewHolder<?> holder = (BaseEntityViewAdapter.EntityViewHolder<?>) view
+				&& view.getTag(AdapterConstant.TAG_KEY) instanceof EntityViewHolder) {
+			EntityViewHolder<?> holder = (EntityViewHolder<?>) view
 					.getTag(AdapterConstant.TAG_KEY);
 			onEntityViewLongClickListener.onEntityViewLongClick(parent, view,
 					holder.entity, holder.position, id);

@@ -1,11 +1,9 @@
 package com.wcl.easybaseadapterdemo;
 
 import android.app.Activity;
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +14,7 @@ import com.wcl.easybaseadapter.adapterview.AdapterViewEntityWrapper;
 import com.wcl.easybaseadapter.adapterview.BaseEntityViewAdapter;
 import com.wcl.easybaseadapter.adapterview.listener.OnEntityViewClickListener;
 import com.wcl.easybaseadapter.entityviewmanage.BaseAdapterEntityViewManage;
+import com.wcl.easybaseadapter.viewholder.EntityViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +47,8 @@ public class MainActivity extends Activity {
             }
 
             @Override
-            public void updateAdapterItemView(Context context, View updateView, Item entity, int position) {
-                TextView textView = (TextView) updateView.findViewById(R.id.item_main);
+            public void updateAdapterItemView(Context context, EntityViewHolder holder, Item entity, int position) {
+                TextView textView = (TextView) holder.findViewById(R.id.item_main);
                 textView.setText(entity.name);
             }
         }));

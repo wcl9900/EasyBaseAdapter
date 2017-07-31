@@ -11,9 +11,10 @@ import android.widget.Toast;
 
 import com.wcl.easybaseadapter.expandablelistView.BaseAdapterEntityExpandableListManage;
 import com.wcl.easybaseadapter.expandablelistView.BaseEntityExpandableListAdapter;
-import com.wcl.easybaseadapter.expandablelistView.DefaultBaseAdapterEntityExpandableListManage;
 import com.wcl.easybaseadapter.expandablelistView.ExpandableListViewAdapterWrapper;
 import com.wcl.easybaseadapter.expandablelistView.listener.OnEntityExpandableListClickListener;
+import com.wcl.easybaseadapter.viewholder.ViewChildHolder;
+import com.wcl.easybaseadapter.viewholder.ViewGroupHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,8 +58,8 @@ public class ExpandableListViewActivity extends Activity {
         }
 
         @Override
-        public void updateGroupView(Context context, ExpandableListView expandListView, boolean isExpanded, View updateGroup, GroupEntity groupEntity, int groupPosition) {
-            TextView textView = (TextView) updateGroup.findViewById(R.id.group);
+        public void updateGroupView(Context context, ExpandableListView expandListView, boolean isExpanded, ViewGroupHolder<GroupEntity> viewGroupHolder, GroupEntity groupEntity, int groupPosition) {
+            TextView textView = (TextView) viewGroupHolder.findViewById(R.id.group);
             textView.setText(groupEntity.name);
         }
 
@@ -68,25 +69,25 @@ public class ExpandableListViewActivity extends Activity {
         }
 
         @Override
-        public void updateChildView(Context context, ExpandableListView expandListView, View updateChild, ChildEntity childEntity, int groupPosition, int childPosition) {
-            TextView textView = (TextView) updateChild.findViewById(R.id.child);
+        public void updateChildView(Context context, ExpandableListView expandListView, ViewChildHolder<GroupEntity, ChildEntity> viewChildHolder, ChildEntity childEntity, int groupPosition, int childPosition) {
+            TextView textView = (TextView) viewChildHolder.findViewById(R.id.child);
             textView.setText(childEntity.name);
         }
     };
 
 //    DefaultBaseAdapterEntityExpandableListManage<GroupEntity, ChildEntity> baseAdapterEntityExpandableListManage =
 //            new DefaultBaseAdapterEntityExpandableListManage<GroupEntity, ChildEntity>(R.layout.item_expandlistview_group, R.layout.item_expandlistview_child) {
-//        @Override
-//        public void updateGroupView(Context context, ExpandableListView expandListView, boolean isExpanded, View updateGroup, GroupEntity groupEntity, int groupPosition) {
-//            TextView textView = (TextView) updateGroup.findViewById(R.id.group);
-//            textView.setText(groupEntity.name);
-//        }
+//                @Override
+//                public void updateGroupView(Context context, ExpandableListView expandListView, boolean isExpanded, ViewGroupHolder<GroupEntity> viewGroupHolder, GroupEntity groupEntity, int groupPosition) {
+//                    TextView textView = (TextView) viewGroupHolder.findViewById(R.id.group);
+//                    textView.setText(groupEntity.name);
+//                }
 //
-//        @Override
-//        public void updateChildView(Context context, ExpandableListView expandListView, View updateChild, ChildEntity childEntity, int groupPosition, int childPosition) {
-//            TextView textView = (TextView) updateChild.findViewById(R.id.child);
-//            textView.setText(childEntity.name);
-//        }
+//                @Override
+//                public void updateChildView(Context context, ExpandableListView expandListView, ViewChildHolder<GroupEntity, ChildEntity> viewChildHolder, ChildEntity childEntity, int groupPosition, int childPosition) {
+//                    TextView textView = (TextView) viewChildHolder.findViewById(R.id.child);
+//                    textView.setText(childEntity.name);
+//                }
 //    };
 
     OnEntityExpandableListClickListener<GroupEntity, ChildEntity> onEntityExpandableListClickListener = new OnEntityExpandableListClickListener<GroupEntity, ChildEntity>() {

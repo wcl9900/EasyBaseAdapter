@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.wcl.easybaseadapter.entityviewmanage.BaseAdapterEntityViewManage;
+import com.wcl.easybaseadapter.viewholder.EntityViewHolder;
 
 /**
  * 默认的抽象适配器视图Item管理器
@@ -27,18 +28,18 @@ public abstract class  DefaultBaseAdapterEntityViewManage<T> implements
 	}
 
 	@Override
-	public void updateAdapterItemView(Context context, View updateView,
+	public void updateAdapterItemView(Context context, EntityViewHolder<T> holder,
 									  T entity, int position) {
-		updateItemView(context, updateView, entity, position);
+		updateItemView(context, holder, entity, position);
 	}
 	
 	/**
 	 * 更新子视图
 	 * @param context
-	 * @param updateView
+	 * @param holder
 	 * @param entity
 	 * @param position
 	 */
-	abstract public void updateItemView(Context context, View updateView,
+	abstract public void updateItemView(Context context, EntityViewHolder<T> holder,
 										T entity, int position) ;
 }

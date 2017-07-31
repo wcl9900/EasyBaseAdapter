@@ -27,8 +27,8 @@
            }
    
            @Override
-           public void updateAdapterItemView(Context context, View updateView, String entity, int position) {
-               TextView textView = (TextView) updateView.findViewById(R.id.tv_item);
+           public void updateAdapterItemView(Context context, EntityViewHolder<String> holder, String entity, int position) {
+               TextView textView = (TextView) holder.findViewById(R.id.tv_item);
                textView.setText(entity);
            }
        };
@@ -47,8 +47,8 @@
             }
     
             @Override
-            public void updateAdapterItemView(Context context, View updateView, Integer entity, int position) {
-                updateView.setBackgroundColor(entity);
+            public void updateAdapterItemView(Context context, EntityViewHolder<Integer> holder, Integer entity, int position) {
+                holder.itemView.setBackgroundColor(entity);
             }
         };
         
@@ -68,8 +68,8 @@
             }
     
             @Override
-            public void updateGroupView(Context context, ExpandableListView expandListView, boolean isExpanded, View updateGroup, GroupEntity groupEntity, int groupPosition) {
-                TextView textView = (TextView) updateGroup.findViewById(R.id.group);
+            public void updateGroupView(Context context, ExpandableListView expandListView, boolean isExpanded, ViewGroupHolder<GroupEntity> viewGroupHolder, GroupEntity groupEntity, int groupPosition) {
+                TextView textView = (TextView) viewGroupHolder.findViewById(R.id.group);
                 textView.setText(groupEntity.name);
             }
     
@@ -79,8 +79,8 @@
             }
     
             @Override
-            public void updateChildView(Context context, ExpandableListView expandListView, View updateChild, ChildEntity childEntity, int groupPosition, int childPosition) {
-                TextView textView = (TextView) updateChild.findViewById(R.id.child);
+            public void updateChildView(Context context, ExpandableListView expandListView, ViewChildHolder<GroupEntity, ChildEntity> viewChildHolder, ChildEntity childEntity, int groupPosition, int childPosition) {
+                TextView textView = (TextView) viewChildHolder.findViewById(R.id.child);
                 textView.setText(childEntity.name);
             }
         };
@@ -93,8 +93,8 @@
     
         private BaseAdapterEntityViewManage<String> baseAdapterEntityViewManage = new DefaultBaseAdapterEntityViewManage<String>(R.layout.item_common) {
              @Override
-             public void updateItemView(Context context, View updateView, String entity, int position) {
-                 TextView textView = (TextView) updateView.findViewById(R.id.tv_item);
+             public void updateItemView(Context context, EntityViewHolder<String> holder, String entity, int position) {
+                 TextView textView = (TextView) holder.findViewById(R.id.tv_item);
                  textView.setText(entity);
              }
          };
@@ -104,14 +104,14 @@
     DefaultBaseAdapterEntityExpandableListManage<GroupEntity, ChildEntity> baseAdapterEntityExpandableListManage =
                 new DefaultBaseAdapterEntityExpandableListManage<GroupEntity, ChildEntity>(R.layout.item_expandlistview_group, R.layout.item_expandlistview_child) {
             @Override
-            public void updateGroupView(Context context, ExpandableListView expandListView, boolean isExpanded, View updateGroup, GroupEntity groupEntity, int groupPosition) {
-                TextView textView = (TextView) updateGroup.findViewById(R.id.group);
+            public void updateGroupView(Context context, ExpandableListView expandListView, boolean isExpanded, ViewGroupHolder<GroupEntity> viewGroupHolder, GroupEntity groupEntity, int groupPosition) {
+                TextView textView = (TextView) viewGroupHolder.findViewById(R.id.group);
                 textView.setText(groupEntity.name);
             }
- 
+
             @Override
-            public void updateChildView(Context context, ExpandableListView expandListView, View updateChild, ChildEntity childEntity, int groupPosition, int childPosition) {
-                TextView textView = (TextView) updateChild.findViewById(R.id.child);
+            public void updateChildView(Context context, ExpandableListView expandListView, ViewChildHolder<GroupEntity, ChildEntity> viewChildHolder, ChildEntity childEntity, int groupPosition, int childPosition) {
+                TextView textView = (TextView) viewChildHolder.findViewById(R.id.child);
                 textView.setText(childEntity.name);
             }
         };

@@ -6,6 +6,8 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 
 import com.wcl.easybaseadapter.constant.AdapterConstant;
+import com.wcl.easybaseadapter.viewholder.ViewChildHolder;
+import com.wcl.easybaseadapter.viewholder.ViewGroupHolder;
 
 import java.util.List;
 
@@ -79,18 +81,20 @@ public class BaseEntityExpandableListAdapter<T1, T2> extends BaseExpandableListA
 							 View convertView, ViewGroup parent) {
 		if(groupPosition <0 || groupPosition >= getGroupCount()) return convertView;
 		
-		ViewHolderGroup viewHolderGroup = null;
+		ViewGroupHolder<T1> viewGroupHolder;
 		if(convertView == null){
 			convertView = viewManage.getGroupView(expandListView.getContext(), expandListView,isExpanded, groupEntityList.get(groupPosition), groupPosition);
-			viewHolderGroup = new ViewHolderGroup();
-			convertView.setTag(AdapterConstant.TAG_KEY, viewHolderGroup);
+			viewGroupHolder = new ViewGroupHolder<T1>();
+			convertView.setTag(AdapterConstant.TAG_KEY, viewGroupHolder);
 		}
 		
-		viewHolderGroup = (ViewHolderGroup) convertView.getTag(AdapterConstant.TAG_KEY);		
-		viewHolderGroup.groupPosition = groupPosition;
-		viewHolderGroup.groupEntity = groupEntityList.get(groupPosition);
+		viewGroupHolder = (ViewGroupHolder) convertView.getTag(AdapterConstant.TAG_KEY);
+		viewGroupHolder.groupPosition = groupPosition;
+		viewGroupHolder.groupEntity = groupEntityList.get(groupPosition);
+		viewGroupHolder.itemView = convertView;
+		viewGroupHolder.viewGroup = parent;
 		
-		viewManage.updateGroupView(expandListView.getContext(), expandListView,isExpanded, convertView, groupEntityList.get(groupPosition), groupPosition);
+		viewManage.updateGroupView(expandListView.getContext(), expandListView,isExpanded, viewGroupHolder, viewGroupHolder.groupEntity, groupPosition);
 
 		return convertView;
 	}
@@ -99,22 +103,24 @@ public class BaseEntityExpandableListAdapter<T1, T2> extends BaseExpandableListA
 	@Override
 	public View getChildView(int groupPosition, int childPosition,
 							 boolean isLastChild, View convertView, ViewGroup parent) {
-		ViewHolderChild viewHolderChild = null;
+		ViewChildHolder<T1,T2> viewChildHolder;
 		T1 groupEntity = groupEntityList.get(groupPosition);
 		T2 childEntity = childEntityList.get(groupPosition).get(childPosition);
 		if(convertView == null){
 			convertView = viewManage.getChildView(expandListView.getContext(), expandListView, childEntity, groupPosition, childPosition);
-			viewHolderChild = new ViewHolderChild();
-			convertView.setTag(AdapterConstant.TAG_KEY, viewHolderChild);
+			viewChildHolder = new ViewChildHolder();
+			convertView.setTag(AdapterConstant.TAG_KEY, viewChildHolder);
 		}
 		
-		viewHolderChild = (ViewHolderChild) convertView.getTag(AdapterConstant.TAG_KEY);	
-		viewHolderChild.groupPosition = groupPosition;
-		viewHolderChild.childPosition = childPosition;
-		viewHolderChild.childEntity = childEntity;
-		viewHolderChild.groupEntity = groupEntity;
+		viewChildHolder = (ViewChildHolder) convertView.getTag(AdapterConstant.TAG_KEY);
+		viewChildHolder.groupPosition = groupPosition;
+		viewChildHolder.childPosition = childPosition;
+		viewChildHolder.childEntity = childEntity;
+		viewChildHolder.groupEntity = groupEntity;
+		viewChildHolder.itemView = convertView;
+		viewChildHolder.viewGroup = parent;
 		
-		viewManage.updateChildView(expandListView.getContext(), expandListView, convertView, childEntity, groupPosition, childPosition);
+		viewManage.updateChildView(expandListView.getContext(), expandListView, viewChildHolder, childEntity, groupPosition, childPosition);
 	
 		return convertView;
 	}
@@ -122,17 +128,5 @@ public class BaseEntityExpandableListAdapter<T1, T2> extends BaseExpandableListA
 	@Override
 	public boolean isChildSelectable(int groupPosition, int childPosition) {
 		return true;
-	}
-	
-	public class ViewHolderGroup{
-		public int groupPosition;
-		public T1 groupEntity;
-	}
-	
-	public class ViewHolderChild{
-		public int groupPosition;
-		public int childPosition;
-		public T1 groupEntity;
-		public T2 childEntity;
 	}
 }

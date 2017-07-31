@@ -4,6 +4,9 @@ import android.content.Context;
 import android.view.View;
 import android.widget.ExpandableListView;
 
+import com.wcl.easybaseadapter.viewholder.ViewChildHolder;
+import com.wcl.easybaseadapter.viewholder.ViewGroupHolder;
+
 /**
  * 伸缩树列表视图管理器
  * @author 王春龙
@@ -21,7 +24,7 @@ public interface BaseAdapterEntityExpandableListManage<T1, T2> {
 	 * @param groupPosition
 	 * @return
 	 */
-	public View getGroupView(Context context, ExpandableListView expandListView, boolean isExpanded, T1 groupEntity, int groupPosition);
+	View getGroupView(Context context, ExpandableListView expandListView, boolean isExpanded, T1 groupEntity, int groupPosition);
 	/**
 	 * 更新组视图
 	 * @param context
@@ -30,7 +33,7 @@ public interface BaseAdapterEntityExpandableListManage<T1, T2> {
 	 * @param groupEntity
 	 * @param groupPosition
 	 */
-	public void updateGroupView(Context context, ExpandableListView expandListView, boolean isExpanded, View updateGroup, T1 groupEntity, int groupPosition);
+	void updateGroupView(Context context, ExpandableListView expandListView, boolean isExpanded, ViewGroupHolder<T1> viewGroupHolder, T1 groupEntity, int groupPosition);
 	
 	/**
 	 * 获取子视图
@@ -41,7 +44,7 @@ public interface BaseAdapterEntityExpandableListManage<T1, T2> {
 	 * @param childPosition
 	 * @return
 	 */
-	public View getChildView(Context context, ExpandableListView expandListView, T2 childEntity, int groupPosition, int childPosition);
+	View getChildView(Context context, ExpandableListView expandListView, T2 childEntity, int groupPosition, int childPosition);
 	/**
 	 * 更新子视图
 	 * @param context
@@ -50,5 +53,5 @@ public interface BaseAdapterEntityExpandableListManage<T1, T2> {
 	 * @param groupPosition
 	 * @param childPosition
 	 */
-	public void updateChildView(Context context, ExpandableListView expandListView, View updateChild, T2 childEntity, int groupPosition, int childPosition);
+	void updateChildView(Context context, ExpandableListView expandListView, ViewChildHolder<T1, T2> viewChildHolder, T2 childEntity, int groupPosition, int childPosition);
 }
