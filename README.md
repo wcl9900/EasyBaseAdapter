@@ -9,7 +9,7 @@
     repositories {
         jcenter()
     }
-    compile 'com.wcl:easybaseadapter:1.0.0'
+    compile 'com.wcl:easybaseadapter:1.1.0'
     
 
     1.基于BaseAdapter的列表视图（ListView、GridView等AbsListView）
