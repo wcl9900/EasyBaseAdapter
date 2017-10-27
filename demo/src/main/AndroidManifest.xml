@@ -19,7 +19,8 @@
         <activity android:name=".GridViewActivity" />
         <activity android:name=".ViewPagerActivity" />
         <activity android:name=".ExpandableListViewActivity" />
-        <activity android:name=".BaseAdapterViewActivity"></activity>
+        <activity android:name=".BaseAdapterViewActivity" />
+        <activity android:name=".RecyclerViewActivity"></activity>
     </application>
 
 </manifest>

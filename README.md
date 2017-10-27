@@ -1,5 +1,5 @@
 # EasyBaseAdapter
-    该库对BaseAdapter、ViewPagerAdapter、BaseExpandableListAdapter等视图适配器进行了最大化封装，使用泛型模式对需要绑定的数据进行解耦，使其在开发过程中使用更加简洁，减少代码冗余，可使开发者不在关心各类Adapter内部的具体实现细节，更多的把注意力转移到业务逻辑处理中，该库使用非常简单，很容易上手，一看就懂，可使开发者最快速度的完成视图数据的绑定和展示，大大的提高了数据适配器绑定视图的开发效率。
+    该库对BaseAdapter、RecyclerView.Adapter、ViewPagerAdapter、BaseExpandableListAdapter等视图适配器进行了最大化封装，使用泛型模式对需要绑定的数据进行解耦，使其在开发过程中使用更加简洁，减少代码冗余，可使开发者不在关心各类Adapter内部的具体实现细节，更多的把注意力转移到业务逻辑处理中，该库使用非常简单，很容易上手，一看就懂，可使开发者最快速度的完成视图数据的绑定和展示，大大的提高了数据适配器绑定视图的开发效率。
 
 # 使用方式
 
@@ -138,3 +138,22 @@
     expandableListViewAdapterWrapper.setBaseEntityExpandableListAdapter(new BaseEntityExpandableListAdapter<GroupEntity, ChildEntity>(expandableListView,
                             groupEntityList, childEntityList, baseAdapterEntityExpandableListManage));
     expandableListViewAdapterWrapper.setOnEntityExpandableListClickListener(onEntityExpandableListClickListener);
+
+    4.RecyclerView数据适配器
+
+    RecyclerAdapterEntityWrapper<String> recyclerAdapterEntityWrapper = new RecyclerAdapterEntityWrapper<>(recyclerView);
+            recyclerAdapterEntityWrapper.setAdapter(new BaseRecyclerViewAdapter<>(dataList, this, baseRecyclerEntityViewManage));
+            recyclerAdapterEntityWrapper.setLayoutManager(new LinearLayoutManager(this));
+            recyclerAdapterEntityWrapper.setOnItemClickListener(new OnItemClickListener<String>() {
+                @Override
+                public void onItemViewClick(View clickView, RecyclerViewHolder viewHolder, String entity, int position) {
+                    Toast.makeText(RecyclerViewActivity.this, "点击了"+entity, Toast.LENGTH_SHORT).show();
+                }
+            });
+            recyclerAdapterEntityWrapper.setOnItemLongClickListener(new OnItemLongClickListener<String>() {
+                @Override
+                public boolean onItemLongClick(View clickView, RecyclerViewHolder viewHolder, String entity, int position) {
+                    Toast.makeText(RecyclerViewActivity.this, "长按了"+entity, Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+            });

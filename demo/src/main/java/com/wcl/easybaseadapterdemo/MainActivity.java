@@ -36,6 +36,7 @@ public class MainActivity extends Activity {
         dataList.add(new Item("GridView", GridViewActivity.class));
         dataList.add(new Item("ViewPager", ViewPagerActivity.class));
         dataList.add(new Item("ExpandListView", ExpandableListViewActivity.class));
+        dataList.add(new Item("RecyclerView", RecyclerViewActivity.class));
 
         AdapterViewEntityWrapper<Item> adapterViewEntityWrapper = new AdapterViewEntityWrapper<Item>(listView);
         adapterViewEntityWrapper.setAdapter(new BaseEntityViewAdapter<Item>(this, dataList, new BaseAdapterEntityViewManage<Item>() {

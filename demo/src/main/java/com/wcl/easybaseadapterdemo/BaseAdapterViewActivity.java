@@ -53,7 +53,7 @@ public class BaseAdapterViewActivity extends Activity {
         }
     };
 
-//    private BaseAdapterEntityViewManage<String> baseAdapterEntityViewManage = new DefaultBaseAdapterEntityViewManage<String>(R.layout.item_common) {
+//    private BaseRecyclerEntityViewManage<String> baseAdapterEntityViewManage = new DefaultBaseRecyclerEntityViewManage<String>(R.layout.item_common) {
 //        @Override
 //        public void updateItemView(Context context, EntityViewHolder<String> holder, String entity, int position) {
 //            TextView textView = (TextView) holder.findViewById(R.id.tv_item);
