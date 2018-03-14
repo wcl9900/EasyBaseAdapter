@@ -113,7 +113,7 @@ public class AdapterViewEntityWrapper<T> implements OnItemClickListener,
 	}
 
 	public void setOnItemClickListener(
-			android.widget.AdapterView.OnItemClickListener listener) {
+			OnItemClickListener listener) {
 		this.itemClickListener = listener;
 	}
 

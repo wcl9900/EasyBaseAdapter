@@ -16,5 +16,5 @@ public interface OnEntityViewClickListener<T>{
 	 * @param entity
 	 * @param position
 	 */
-	public void onEntityViewClick(AdapterView<?> parent, View clickView, T entity, int position);
+	void onEntityViewClick(AdapterView<?> parent, View clickView, T entity, int position);
 }

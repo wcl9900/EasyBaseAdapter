@@ -1,11 +1,9 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
 
-def version = '1.1.0'
+version = '1.5.0'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion '25.0.0'
 
     defaultConfig {
         minSdkVersion 14
@@ -22,8 +20,8 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:+'
-    compile 'com.android.support:recyclerview-v7:+'
+    compile 'com.android.support:support-v4:25.2.0'
+    compile 'com.android.support:recyclerview-v7:24.2.1'
 }
 
 android {
@@ -32,11 +30,107 @@ android {
     }
 }
 
-publish {
-    userOrg = 'wangchunlong'
-    groupId = 'com.wcl'
-    artifactId = 'easybaseadapter'
-    publishVersion = version
-    desc = '该库对BaseAdapter、ViewPagerAdapter、BaseExpandableListAdapter等视图适配器进行了最大化封装，使用泛型模式对需要绑定的数据进行解耦，使其在开发过程中使用更加简洁，减少代码冗余，可使开发者不在关心各类Adapter内部的具体实现细节，更多的把注意力转移到业务逻辑处理中，该库使用非常简单，很容易上手，一看就懂，可使开发者最快速度的完成视图数据的绑定和展示，大大的提高了数据适配器绑定视图的开发效率。'
-    website = 'https://github.com/wcl9900/EasyBaseAdapter'
+//发布 start
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+def siteUrl = 'https://github.com/wcl9900/EasyBaseAdapter'    // project homepage
+def gitUrl = 'https://github.com/wcl9900/EasyBaseAdapter.git' // project git
+
+group = "com.wcl"
+def artifactId = "easybaseadapter"
+
+def repository = "maven"//仓库名称
+def packagingType = "jar"//jar、aar
+def userOrgName = "wangchunlong"//组织名称
+
+//库描述介绍
+def descRep = "该库对BaseAdapter、ViewPagerAdapter、BaseExpandableListAdapter等视图适配器进行了最大化封装，使用泛型模式对需要绑定的数据进行解耦，使其在开发过程中使用更加简洁，减少代码冗余，可使开发者不在关心各类Adapter内部的具体实现细节，更多的把注意力转移到业务逻辑处理中，该库使用非常简单，很容易上手，一看就懂，可使开发者最快速度的完成视图数据的绑定和展示，大大的提高了数据适配器绑定视图的开发效率。"
+//库版本信息描述
+def descVersion = ""
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging packagingType
+                name artifactId
+                url siteUrl
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'wcl99'
+                        name 'wangchunlong'
+                        email '990017809@163.com'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
 }
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+Properties properties = new Properties()
+boolean isHasFile = false
+if (project.rootProject.file('local.properties') != null){
+    isHasFile = true
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+}
+bintray {
+    user = isHasFile ? properties.getProperty("bintray.user") : System.getenv("bintray.user")
+    key = isHasFile ? properties.getProperty("bintray.apikey") : System.getenv("bintray.apikey")
+    configurations = ['archives']
+    pkg {
+        repo = repository
+        name = artifactId
+        userOrg = userOrgName
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+        publicDownloadNumbers = true
+        desc = descRep
+        version {
+//            name = '1.0'
+            desc = descVersion
+            released  = new Date()
+        }
+    }
+    javadoc { //jav doc采用utf-8编码否则会报“GBK的不可映射字符”错误
+        options {
+            encoding "UTF-8"
+            charSet 'UTF-8'
+        }
+    }
+}
+//发布 end

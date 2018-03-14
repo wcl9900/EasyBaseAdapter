@@ -27,7 +27,6 @@ public interface BaseAdapterEntityViewManage<T> {
 	 * @param holder 需要更新的子视图
 	 * @param entity 更新子视图所需实体数据
 	 * @param position 更新子视图所在位置
-	 * @return
 	 */
 	void updateAdapterItemView(Context context, EntityViewHolder<T> holder, T entity, int position);
 }

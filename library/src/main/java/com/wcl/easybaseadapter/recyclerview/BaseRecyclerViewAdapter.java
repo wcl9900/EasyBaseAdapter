@@ -11,7 +11,7 @@ import com.wcl.easybaseadapter.recyclerview.listener.OnItemLongClickListener;
 import java.util.List;
 
 /**
- * {@link RecyclerView}的{@link android.support.v7.widget.RecyclerView.Adapter}的封装类
+ * {@link RecyclerView}的{@link RecyclerView.Adapter}的封装类
  * Created by wangchunlong on 2017/10/27.
  */
 
